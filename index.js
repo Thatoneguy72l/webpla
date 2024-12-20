@@ -1,16 +1,6 @@
 // We enclose this in window.onload.
 // So we don't have ridiculous errors.
 window.onload = function() {
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyAbMJ4r3pJb-gatbYnsCAiDAUhVJPSKb0U",
-  authDomain: "discussit-56192.firebaseapp.com",
-  projectId: "discussit-56192",
-  storageBucket: "discussit-56192.firebasestorage.app",
-  messagingSenderId: "678822987353",
-  appId: "1:678822987353:web:99a97450f3fb818a185348",
-  measurementId: "G-VGQV7WVGYQ"
-};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
