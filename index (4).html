@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Sharing Platform</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        /* Header Styling */
+        header {
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 32px;
+            border-radius: 10px 10px 0 0; /* Rounded top corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Chat Log Styling */
+        #chat-log {
+            width: 90%;
+            max-width: 800px;
+            height: 400px;
+            border-radius: 10px;
+            overflow-y: auto;
+            margin-top: 30px;
+            padding: 20px;
+            box-sizing: border-box;
+            font-size: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .chat-entry {
+            margin-bottom: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .chat-entry span {
+            font-weight: bold;
+        }
+
+        /* Media Upload Section */
+        #media-upload {
+            margin-top: 30px;
+            text-align: center;
+            width: 90%;
+            max-width: 800px;
+        }
+
+        #media-upload h2 {
+            font-size: 24px;
+        }
+
+        input[type="file"] {
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="file"]:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Message Input Section */
+        .message-input-container {
+            width: 90%;
+            max-width: 800px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .message-input {
+            width: 100%;
+            max-width: 600px;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            transition: border-color 0.3s;
+        }
+
+        .submit-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        /* Footer Styling */
+        .footer {
+            margin-top: auto;
+            padding: 15px;
+            width: 100%;
+            text-align: center;
+            border-radius: 0 0 10px 10px;
+        }
+
+        /* Theme 1: Light Theme (Normal) */
+        .normal-theme {
+            background-color: #f7f9fc;
+            color: #333;
+        }
+
+        .normal-theme header {
+            background-color: #5f6368;
+            color: white;
+        }
+
+        .normal-theme #chat-log {
+            background-color: white;
+            border: 1px solid #ddd;
+        }
+
+        .normal-theme .chat-entry {
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .normal-theme .submit-btn {
+            background-color: #3f51b5;
+            color: white;
+        }
+
+        .normal-theme .submit-btn:hover {
+            background-color: #303f9f;
+        }
+
+        /* Theme 2: Dark Theme */
+        .dark-theme {
+            background-color: #121212;
+            color: #EAEAEA;
+        }
+
+        .dark-theme header {
+            background-color: #333;
+            color: white;
+        }
+
+        .dark-theme #chat-log {
+            background-color: #1f1f1f;
+            border: 1px solid #333;
+        }
+
+        .dark-theme .chat-entry {
+            background-color: #2a2a2a;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-theme .submit-btn {
+            background-color: #1a73e8;
+            color: white;
+        }
+
+        .dark-theme .submit-btn:hover {
+            background-color: #0f5e96;
+        }
+
+        /* Theme 3: Blue Theme */
+        .blue-theme {
+            background-color: #f1f9fc;
+            color: #333;
+        }
+
+        .blue-theme header {
+            background-color: #1a73e8;
+            color: white;
+        }
+
+        .blue-theme #chat-log {
+            background-color: white;
+            border: 1px solid #ddd;
+        }
+
+        .blue-theme .chat-entry {
+            background-color: #f1f9fc;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .blue-theme .submit-btn {
+            background-color: #1a73e8;
+            color: white;
+        }
+
+        .blue-theme .submit-btn:hover {
+            background-color: #0f5e96;
+        }
+
+        /* Dropdown Styling */
+        select {
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        select:hover {
+            background-color: #f1f1f1;
+        }
+
+    </style>
+</head>
+<body class="normal-theme">
+
+<header>
+    <h1>Media Sharing Platform</h1>
+    <div>
+        <label for="theme-selector">Select Theme: </label>
+        <select id="theme-selector" onchange="setTheme()">
+            <option value="normal-theme">Normal</option>
+            <option value="dark-theme">Dark</option>
+            <option value="blue-theme">Blue</option>
+        </select>
+    </div>
+</header>
+
+<div id="chat-log">
+    <div class="chat-entry"><span>User1:</span> Hey, check out this cool video!</div>
+    <div class="chat-entry"><span>User2:</span> Wow, looks awesome! Can you upload it?</div>
+    <div class="chat-entry"><span>User3:</span> Here's a picture I just uploaded!</div>
+</div>
+
+<div id="media-upload">
+    <h2>Upload Your Media</h2>
+    <input type="file" id="mediaFile" accept="image/*,video/*,audio/*">
+    <button onclick="uploadMedia()">Upload</button>
+</div>
+
+<!-- Message Input Section -->
+<div class="message-input-container">
+    <textarea class="message-input" id="messageInput" placeholder="Type a message..." rows="4"></textarea>
+    <button class="submit-btn" onclick="sendMessage()">Send Message</button>
+</div>
+
+<div class="footer">
+    <p>&copy; 2024 Media Sharing Platform</p>
+</div>
+
+<script>
+    // Function to set the theme based on dropdown selection
+    function setTheme() {
+        const themeSelector = document.getElementById('theme-selector');
+        const selectedTheme = themeSelector.value;
+        
+        // Remove all theme classes
+        document.body.classList.remove('normal-theme', 'dark-theme', 'blue-theme');
+        
+        // Add the selected theme class
+        document.body.classList.add(selectedTheme);
+    }
+
+    // Upload Media Functionality
+    function uploadMedia() {
+        const fileInput = document.getElementById('mediaFile');
+        const file = fileInput.files[0];
+
+        if (!file) {
+            alert("Please select a file to upload.");
+            return;
+        }
+
+        const chatLog = document.getElementById('chat-log');
+        const newEntry = document.createElement('div');
+        newEntry.classList.add('chat-entry');
+        newEntry.textContent = `You uploaded a ${file.type} file: ${file.name}`;
+        
+        chatLog.appendChild(newEntry);
+        chatLog.scrollTop = chatLog.scrollHeight;  // Scroll to bottom after adding new message
+        fileInput.value = '';  // Clear the file input after upload
+    }
+
+    // Send Message Functionality
+    function sendMessage() {
+        const messageInput = document.getElementById('messageInput');
+        const message = messageInput.value.trim();
+
+        if (message === '') {
+            alert("Please type a message before sending.");
+            return;
+        }
+
+        const chatLog = document.getElementById('chat-log');
+        const newEntry = document.createElement('div');
+        newEntry.classList.add('chat-entry');
+        newEntry.textContent = `You: ${message}`;
+        
+        chatLog.appendChild(newEntry);
+        chatLog.scrollTop = chatLog.scrollHeight;  // Scroll to bottom after adding new message
+        messageInput.value = '';  // Clear message input
+    }
+</script>
+
+</body>
+</html>
